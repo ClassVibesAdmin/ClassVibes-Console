@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="stylesheet" href="/css/index.css">
+
+  <title>ClassVibes</title>
+
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link
+    href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+    rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+
+  <!--BOOTSTRAP-->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js" integrity="sha384-1CmrxMRARb6aLqgBO7yyAxTOQE2AKb9GfXnEo760AUcUmFx3ibVJJAzGytlQcNXd" crossorigin="anonymous"></script>
+
+
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<link rel = 'stylesheet' href = "css/styles.css">
+<script src="js/auth.js"></script>
+
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+
+<!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+<script src="https://www.gstatic.com/firebasejs/7.14.4/firebase-analytics.js"></script>
+
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
+
+
+</head>
+
+<body style="background-color: royalblue;" onload = "initializeFirebase()">
+  <script>
+    AOS.init();
+  </script>
+
+  <!-- HEADER -->
+  <section id="header">
+    <header style="background-color: royalblue; margin-bottom: 0px;">
+
+      <!-- NAVBAR -->
+
+      <div class="container-fluid" >
+        <nav class="navbar navbar-expand-lg navbar-light bg-custom">
+          <a class="navbar-brand" href="#header" style="color: white; font-size: 25px; font-weight: 700;">ClassVibes Developer</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="d-flex justify-content-center" style="margin-top: 150px">
+
+      </div>
+
+    </header>
+
+    <center>
+      <div style="margin-top:3%;">
+        <section class = "center-loginCard">
+          <h2 style="padding-top: 20px;">Developer Login</h2>
+
+          <section id = "loginAlert" style="margin-left: 30px; margin-right: 30px;">
+            
+          </section>
+
+          <div class="col" align = "left" style="margin-left: 20px; margin-top: 40px; padding-right: 40px;">
+            <h5>Username</h5>
+
+            <input type="text" class="form-control bg-light border-3 small" placeholder="" aria-label="Search" aria-describedby="basic-addon2" id = "usernameInput">
+
+            <h5 style="margin-top: 20px;">Password</h5>
+
+            <input type="password" class="form-control bg-light border-3 small" placeholder="" aria-label="Search" aria-describedby="basic-addon2" id = "passwordInput">
+
+            <h5 style="margin-top: 20px;">Developer Secret</h5>
+
+            <input type="password" class="form-control bg-light border-3 small" placeholder="" aria-label="Search" aria-describedby="basic-addon2" id = "developerSecretInput">
+            
+
+            <a href="#" class="btn btn-primary btn-icon-split btn-lg" style="height: 45px; margin-top: 80px; width: 100%; margin-bottom: 20px;" onclick = "signInWithEmail();">
+              <span class="text" style="margin-top: -25px;">Login</span>
+            </a>
+
+          </div>
+          
+        </section>
+
+      </div>
+    </center>
+    
+  
+  </section>
+
+
+  
+
+
+</body>
+
+</html>
