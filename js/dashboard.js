@@ -1,4 +1,93 @@
-/*
+function initializeFirebase(){
+    var firebaseConfig = {
+        apiKey: "AIzaSyA2ESJBkNRjibHsQr2UTHtyYPslzNleyXw",
+        authDomain: "cyberdojo-a2a3e.firebaseapp.com",
+        databaseURL: "https://cyberdojo-a2a3e.firebaseio.com",
+        projectId: "cyberdojo-a2a3e",
+        storageBucket: "cyberdojo-a2a3e.appspot.com",
+        messagingSenderId: "938057332518",
+        appId: "1:938057332518:web:99c34da5abf1b1548533e7",
+        measurementId: "G-0EWJ1V40VX"
+      };
+    
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+}
+
+
+function getDashboardData(){
+    
+  firebase.firestore().collection("Application Management").doc("Statistics").get().then((documentSnapshot) => {
+
+    var value = documentSnapshot.data();
+
+    var totalEarnings = value.totalEarnings;
+    var totalUsers = value.totalUsers;
+    var districtsTotal = value.totalDistricts;
+    var mobile = value.mobileUsers;
+    var web = value.webUsers;
+
+    $('#totalEarnings').html("$" + totalEarnings);
+    $('#totalUsers').html(totalUsers);
+    $('#totalDistricts').html(districtsTotal);
+
+    // Set new default font family and font color to mimic Bootstrap's default styling
+Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+Chart.defaults.global.defaultFontColor = '#858796';
+
+// Pie Chart Example
+var ctx = document.getElementById("platformsPieChart");
+
+console.log(mobile);
+console.log(web);
+
+if(mobile == 0 && web == 0){
+  ctx.outerHTML = `<center style = 'margin-top: 23%;'><h4 style = 'color: grey'>No data</h4></center>`;
+}
+
+    var jan = value.janEarnings;
+    var feb = value.febEarnings;
+    var mar = value.marEarnings;
+    var apr = value.aprEarnings;
+    var may = value.mayEarnings;
+    var jun = value.junEarnings;
+    var jul = value.julyEarnings;
+    var aug = value.augEarnings;
+    var sep = value.sepEarnings;
+    var oct = value.octEarnings;
+    var nov = value.novEarnings;
+    var dec = value.decEarnings;
+
+
+var myPieChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["Mobile", "Web"],
+    datasets: [{
+      data: [mobile, web],
+      backgroundColor: ['#4e73df', '#1cc88a',],
+      hoverBackgroundColor: ['#2e59d9', '#17a673'],
+      hoverBorderColor: "rgba(234, 236, 244, 1)",
+    }],
+  },
+  options: {
+    maintainAspectRatio: false,
+    tooltips: {
+      backgroundColor: "rgb(255,255,255)",
+      bodyFontColor: "#858796",
+      borderColor: '#dddfeb',
+      borderWidth: 1,
+      xPadding: 15,
+      yPadding: 15,
+      displayColors: false,
+      caretPadding: 10,
+    },
+    legend: {
+      display: false
+    },
+    cutoutPercentage: 80,
+  },
+});
 
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
@@ -48,7 +137,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 50000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec],
     }],
   },
   options: {
@@ -119,4 +208,9 @@ var myLineChart = new Chart(ctx, {
   }
 });
 
-*/
+
+
+    console.log(totalEarnings);
+
+  });
+}
