@@ -26,10 +26,6 @@ function getSearchResults(){
         document.getElementById('searchResults').style.display = "initial";
    }, 1000); 
 
-   if(){
-       
-   }
-
    document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-primary' style = 'margin-left: 20px'>District Accounts</span>";
 
 
