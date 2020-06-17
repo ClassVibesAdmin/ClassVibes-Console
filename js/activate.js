@@ -15,18 +15,33 @@ function initializeFirebase(){
 }
 
 
-function getSearchResults(){
+function getSearchResults(searchType){
     document.getElementById('askUserSection').style.display = "none";
     document.getElementById('loadingIndicator').style.display = "initial";
 
     var resultSearchText = document.getElementById('searchInput').value;
 
     setTimeout(function(){
+
+        if(searchType == 'district'){
+            firebase.firestore().collection("Districts").doc(resultSearchText).get().then((documentSnapshot) => {
+                console.log(documentSnapshot.data());
+            });
+        }
+
+        else if(searchType == "teacher"){
+            firebase.firestore().collection("Teachers").doc(resultSearchText).get().then((documentSnapshot) => {
+                console.log(documentSnapshot.data());
+            });
+        }
+
         document.getElementById('loadingIndicator').style.display = "none";
         document.getElementById('searchResults').style.display = "initial";
    }, 1000); 
 
-   document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-primary' style = 'margin-left: 20px'>District Accounts</span>";
+
+
+   document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-primary' style = 'margin-left: 10px; margin-top: -10px'>District Accounts</span>";
 
 
 
