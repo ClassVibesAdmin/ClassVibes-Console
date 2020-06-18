@@ -247,9 +247,9 @@ function activateAccount(activationType, activationID) {
     var dateNow = new Date();
 
     //Format Today's date (Activation Date)
-    var ddActivated = String(expireDate.getDate()).padStart(2, '0');
-    var mmActivated = String(expireDate.getMonth() + 1).padStart(2, '0'); 
-    var yyyyActivated = expireDate.getFullYear();
+    var ddActivated = String(dateNow.getDate()).padStart(2, '0');
+    var mmActivated = String(dateNow.getMonth() + 1).padStart(2, '0'); 
+    var yyyyActivated = dateNow.getFullYear();
 
     activationDateFormatted = ddActivated + '/' + mmActivated + '/' + yyyyActivated;
 
