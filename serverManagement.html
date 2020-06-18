@@ -313,8 +313,8 @@
                     
 
                     <div class="switch">
-                        <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round-flat" type="checkbox" onclick = "changeServerStatus()" checked>
-                        <label for="cmn-toggle-4" checked></label>
+                        <input id="serverChangeToggle" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
+                        <label for="serverChangeToggle"></label>
                       </div>
 
 
@@ -324,14 +324,16 @@
                         <div class="input-group">
                             <input type="password" class="form-control bg-light border-3 small"
                                 placeholder="Server Manager Key" aria-label="Search"
-                                aria-describedby="basic-addon2" id="serverManagerKey">
+                                aria-describedby="basic-addon2" id="serverManagerKeyInput">
 
                         </div>
                     </form>
 
                     <p style="margin-top: 10px;">All server change attemps are logged.</p>
 
-                    <a href="#" class="btn btn-primary btn-icon-split btn-m" style="margin-top: 20px; position: absolute; top: 80%">
+                    <div id = "serverStatusChangeError"></div>
+
+                    <a href="#" class="btn btn-primary btn-icon-split btn-m" style="margin-top: 20px; position: absolute; top: 80%" onclick = "changeServerStatus()">
                         <span class="text">Change Server Status</span>
                       </a>
 

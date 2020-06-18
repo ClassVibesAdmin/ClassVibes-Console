@@ -14,21 +14,26 @@ function initializeFirebase() {
     firebase.initializeApp(firebaseConfig);
 }
 
-function getServerManagementInfo(){
+function getServerManagementInfo() {
 
     firebase.firestore().collection("Application Management").doc("ServerManagement").get().then((documentSnapshot) => {
-        var data  = documentSnapshot.data();
+        var data = documentSnapshot.data();
 
         var serverStatus = data["serversAreUp"];
 
-        if(serverStatus == true){
+        if (serverStatus == true) {
 
             var onlineHTML = `
             <span class = "badge badge-success" style="height: 30px; width: 100px; font-size: 20px;">Online</span>
             `;
             $('#serverStatus').html(onlineHTML);
 
-        } else if(serverStatus == false){
+            document.getElementById("serverChangeToggle").checked = true;
+
+        } else if (serverStatus == false) {
+
+            document.getElementById("serverChangeToggle").checked = false;
+
             var offlineHTML = `
             <span class = "badge badge-danger" style="height: 30px; width: 100px; font-size: 20px;">Offline</span>
             `;
@@ -37,20 +42,61 @@ function getServerManagementInfo(){
 
         }
 
-        var serverLastDowntime = data['lastDowntime'];
+        var serverLastDowntime = data['lastDownTime'];
 
-        if(serverLastDowntime == undefined || serverLastDowntime == null){
+        if (serverLastDowntime == undefined || serverLastDowntime == null) {
             $('#lastServerDownTime').html("Never");
         } else {
-            $('#lastServerDownTime').html("10/20/2020 12:10 AM");
+            $('#lastServerDownTime').html(serverLastDowntime);
         }
 
 
     });
 }
 
-function changeServerStatus(){
-    var checkedStatus = $('#cmn-toggle-4').is(':checked');
+function changeServerStatus() {
+    var checkedStatus = $('#serverChangeToggle').is(':checked');
+    var serverManagerKey = document.getElementById('serverManagerKeyInput').value;
+
+    if (serverManagerKey == 'tdoSeexYY/sM/VQ==994jmc903t48hs3e3dsf4rf') {
+        $('#serverStatusChangeError').html('');
+
+        if (checkedStatus == true) {
+
+            firebase.firestore().collection("Application Management").doc("ServerManagement").update({
+                "serversAreUp": true,
+                
+            });
+
+
+        } else {
+
+            var today = new Date();
+            var todayFormatted = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+            firebase.firestore().collection("Application Management").doc("ServerManagement").update({
+                "serversAreUp": false,
+                "lastDownTime": todayFormatted,
+            });
+        }
+
+        setTimeout(function () {
+            location.reload();
+        }, 1500);
+
+
+    } else {
+        var errorHTML = `
+        <div class="alert alert-danger" role="alert">
+  Server Manager Key is incorrect
+</div>
+        `;
+
+        $('#serverStatusChangeError').html(errorHTML);
+    }
+
+
+
 
     console.log(checkedStatus);
 }
