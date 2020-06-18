@@ -456,9 +456,16 @@ function deactivate(deactiveType, deactivationID){
                 "status": "Deactivated"
             });
 
+
+            document.getElementById('loadingIndicator').style.display = "none";
+
             $('#activateModal').modal('toggle');
 
-            getSearchResults('district');
+            setTimeout(function(){
+                getSearchResults('district');
+                document.getElementById('searchResults').style.display = "initial";
+           }, 2000); 
+            
         }
     } else {
 
