@@ -19,7 +19,17 @@ function getSearchResults(searchType) {
     document.getElementById('askUserSection').style.display = "none";
     document.getElementById('loadingIndicator').style.display = "initial";
 
-    var resultSearchText = document.getElementById('searchInput').value;
+    var resultSearchText = "";
+
+    if(searchType == "district"){
+        resultSearchText = document.getElementById('searchInputDistrict').value;
+    }
+
+    if(searchType == "teacher"){
+        resultSearchText = document.getElementById('searchInputTeacher').value;
+    }
+
+
 
     var noResultsHTML = `
     <div class="d-flex justify-content-center" style="margin-top: 12%;">
@@ -34,6 +44,9 @@ function getSearchResults(searchType) {
     `;
 
     if (searchType == 'district') {
+
+        document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-primary' style = 'margin-left: 10px; margin-top: -10px'>District Accounts</span>";
+
         firebase.firestore().collection("Districts").doc(resultSearchText).get().then((documentSnapshot) => {
             console.log(documentSnapshot.data());
 
@@ -226,9 +239,213 @@ function getSearchResults(searchType) {
     }
 
     else if (searchType == "teacher") {
-        firebase.firestore().collection("Teachers").doc(resultSearchText).get().then((documentSnapshot) => {
-            console.log(documentSnapshot.data());
+
+        document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-warning' style = 'margin-left: 10px; margin-top: -10px'>Teacher Accounts</span>";
+
+        firebase.firestore().collection("UserData").doc(resultSearchText).get().then((documentSnapshot) => {
+
+
+            if (documentSnapshot.data()["Account Type"] == undefined || documentSnapshot.data()["Account Type"] == null) {
+                document.getElementById('searchResultsSection').innerHTML = noResultsHTML;
+
+            } else {
+
+                console.log(documentSnapshot.data()["Account Type"]);
+
+                var value = documentSnapshot.data();
+
+                var teacherEmail = value["email"];
+
+                var teacherStatus = value["Account Status"];
+
+                var teacherName = value["display-name"];
+
+                console.log(teacherStatus);
+
+                console.log(teacherEmail);
+
+                var teacherCardHTML = `
+                <div id="searchResultsSection">
+                        <div class="col-xl-12 col-md-8 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                Teacher</div>
+
+                                            <div class="h4 mb-0 font-weight-bold text-gray-800">${teacherName}</div>
+                                            <div class="h6 mb-1 font-weight-bold text-gray-600">${teacherEmail}</div>
+                                        </div>
+
+                                        <div class="col-auto">
+                                        <section id='activateButton'>
+
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+
+
+                $('#searchResultsSection').html(teacherCardHTML);
+
+                console.log(teacherStatus);
+
+                if (teacherStatus == "Deactivated") {
+                    var activateHTML = `
+                    <a href="#" class="btn btn-primary btn-icon-split btn-lg"
+                    data-toggle="modal" data-target="#activateModal">
+                    <span class="text">Activate</span>
+                </a>
+
+                <!-- Activation Modal -->
+                <div class="modal fade" id="activateModal" tabindex="-1"
+                    role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    Activate Teacher Account</h5>
+                                <button type="button" class="close"
+                                    data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!--MODAL BODY START-->
+                                <h6>Activation Valid For</h6>
+
+
+                                <div class="row">
+
+                                    <div class="col">
+                                        <input type="text"
+                                            class="form-control bg-light border-0 small"
+                                            placeholder="Years" aria-label="Search"
+                                            aria-describedby="basic-addon2" id = "yearsInput">
+
+                                    </div>
+
+                                    <div class="col">
+                                        <input type="text"
+                                            class="form-control bg-light border-0 small"
+                                            placeholder="Months" aria-label="Search"
+                                            aria-describedby="basic-addon2" id = "monthsInput">
+
+                                    </div>
+
+                                    <div class="col">
+                                        <input type="text"
+                                            class="form-control bg-light border-0 small"
+                                            placeholder="Days" aria-label="Search"
+                                            aria-describedby="basic-addon2" id = "daysInput">
+
+                                    </div>
+
+                                </div>
+
+                                <h6 style="margin-top: 20px;">Transaction ID</h6>
+
+                                <input type="text"
+                                    class="form-control bg-light border-0 small"
+                                    placeholder="ID" aria-label="Search"
+                                    aria-describedby="basic-addon2" id = "transactionIDInput">
+
+
+                                    <h6 style="margin-top: 20px;">Transaction Amount</h6>
+
+                                    <input type="text"
+                                        class="form-control bg-light border-0 small"
+                                        placeholder="Ammount" aria-label="Search"
+                                        aria-describedby="basic-addon2" id = "transactionAmountInput">
+
+
+                                <h6 style="margin-top: 20px;">Activation Key</h6>
+
+                                <input type="password"
+                                    class="form-control bg-light border-0 small"
+                                    placeholder="Code" aria-label="Search"
+                                    aria-describedby="basic-addon2" id = "activationKey">
+
+                                    <div id = "activationError" style = "margin-top: 10px">
+                                   
+                                    </div>
+
+                                <!--MODAL BODY END-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary"
+                                     onclick = "activateAccount('teacher', ${resultSearchText})">Activate Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    `;
+
+                    $('#activateButton').html(activateHTML);
+                }
+                else if (teacherStatus == "Activated") {
+                    var deactivateHTML = `
+                    <a href="#" class="btn btn-danger btn-icon-split btn-lg"
+                    data-toggle="modal" data-target="#deActivateModal">
+                    <span class="text">Deactivate Teacher Account</span>
+                </a>
+
+                <!--DEACTIVATION MODAL-->
+                <!-- Modal -->
+                <div class="modal fade" id="deActivateModal" tabindex="-1"
+                    role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">
+                                    Deactivate District</h5>
+                                <button type="button" class="close"
+                                    data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <!--MODAL BODY START-->
+
+                                <h6 style="margin-top: 10px;">Deactivation Key</h6>
+
+                                <input type="password"
+                                    class="form-control bg-light border-0 small"
+                                    placeholder="Code" aria-label="Search"
+                                    aria-describedby="basic-addon2" id = "deactivationKeyInput">
+
+                                <div id = 'deActivationError' style = "margin-top: 10px">
+                                
+                                </div>
+
+                                <!--MODAL BODY END-->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-danger" onclick = "deactivate('teacher', '${resultSearchText}')">Deactivate Account</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    `;
+
+                    $('#activateButton').html(deactivateHTML);
+                }
+            }
+
         });
+
+
     }
 
     setTimeout(function () {
@@ -236,7 +453,7 @@ function getSearchResults(searchType) {
         document.getElementById('searchResults').style.display = "initial";
     }, 1500);
 
-    document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-primary' style = 'margin-left: 10px; margin-top: -10px'>District Accounts</span>";
+  
 
 }
 
@@ -435,7 +652,137 @@ function activateAccount(activationType, activateID) {
            }, 2000); 
 
     
+        }  else if (activationType == 'teacher'){
+
+            //Activates Plan in Teacher Doc
+
+            console.log('Activates Plan in Teacher Doc');
+
+            firebase.firestore().collection('UserData').doc(activationID).update({
+                "Account Status": "Activated",
+                "Account Type": "Solo Teacher"
+    
+            });
+
+            var teacherPlanDetails = {
+                "planStatus": "Activated",
+                "planActivated": activationDateFormatted,
+                "planExpire": expireDateFormatted,
+                "planName" : "Teacher Plan Monthly",
+            }
+
+            firebase.firestore().collection('UserData').doc(activationID).update({
+                planDetails: teacherPlanDetails
+    
+            });
+            
+            //Adds transaction receipt
+
+            console.log('Adds transaction receipt');
+
+            firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).set({
+                "districtID": activationID,
+                "planActivated": activationDateFormatted,
+                "planExpire": expireDateFormatted,
+                "planName" : "Teacher Plan Monthly",
+                "transactionAmount": transactionAmount,
+                "transactionID": transactionID
+            });
+
+            //Adds new transaction to total
+
+            const increment = firebase.firestore.FieldValue.increment(Number(transactionAmount));
+
+            var monthChild = monthAbbreviation + "Earnings";
+
+            var updateChild = {};
+
+            updateChild.monthChild = increment
+
+            console.log('Adds new transaction to total');
+
+            firebase.firestore().collection('Application Management').doc('Statistics').update({
+               "totalEarnings": increment,
+            });
+
+            if(monthChild == "janEarnings"){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "janEarnings": increment,
+                 });
+            } 
+
+            else if(monthChild == 'febEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "febEarnings": increment,
+                 });
+            }
+
+            else if(monthChild == 'marEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "marEarnings": increment,
+                 });
+            }
+
+            else if(monthChild == 'aprEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "aprEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'mayEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "mayEarnings": increment,
+                 }); 
+            }
+            else if(monthChild == 'junEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "junEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'julEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "julEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'augEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "augEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'sepEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "sepEarnings": increment,
+                 });
+            }
+
+            else if(monthChild == 'octEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "octEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'novEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "novEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'decEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "decEarnings": increment,
+                 });
+            }
+
+            $('#activateModal').modal('toggle');
+
+            document.getElementById('loadingIndicator').style.display = "initial";
+            document.getElementById('searchResults').style.display = "none";
+
+            setTimeout(function(){
+                getSearchResults('district');
+                document.getElementById('searchResults').style.display = "initial";
+                document.getElementById('loadingIndicator').style.display = "none";
+           }, 2000); 
         }
+
+
     } else {
         console.log("Activation ID Is invalid");
 
@@ -474,7 +821,24 @@ function deactivate(deactiveType, deactivationID){
                 document.getElementById('loadingIndicator').style.display = "none";
            }, 2000); 
             
+        } else if(deactiveType == 'teacher'){
+            firebase.firestore().collection('UserData').doc(deactivationID.toString()).update({
+                "Account Status": "Deactivated"
+            });
+
+            $('#deActivateModal').modal('toggle');
+
+            document.getElementById('loadingIndicator').style.display = "initial";
+            document.getElementById('searchResults').style.display = "none";
+
+            setTimeout(function(){
+                getSearchResults('district');
+                document.getElementById('searchResults').style.display = "initial";
+                document.getElementById('loadingIndicator').style.display = "none";
+           }, 2000); 
+
         }
+
     } else {
 
         var errorHTMLActivation = `
