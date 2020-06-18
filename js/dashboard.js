@@ -51,7 +51,7 @@ if(mobile == 0 && web == 0){
     var apr = value.aprEarnings;
     var may = value.mayEarnings;
     var jun = value.junEarnings;
-    var jul = value.julyEarnings;
+    var jul = value.julEarnings;
     var aug = value.augEarnings;
     var sep = value.sepEarnings;
     var oct = value.octEarnings;
