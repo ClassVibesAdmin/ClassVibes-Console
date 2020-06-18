@@ -325,6 +325,8 @@ function activateAccount(activationType, activationID) {
 
     
         }
+    } else {
+        console.log("Activation ID Is invalid");
     }
 
 
