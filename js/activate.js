@@ -70,11 +70,11 @@ function getSearchResults(searchType) {
                     `;
 
 
-                    $(districtCardHTML).appendTo('#searchResultsSection');
-                    
-                    console.log(districtStatus);
+                $(districtCardHTML).appendTo('#searchResultsSection');
 
-                if(districtStatus == "Deactivated"){
+                console.log(districtStatus);
+
+                if (districtStatus == "Deactivated") {
                     var activateHTML = `
                     <a href="#" class="btn btn-primary btn-icon-split btn-lg"
                     data-toggle="modal" data-target="#activateModal">
@@ -165,8 +165,8 @@ function getSearchResults(searchType) {
                     `;
 
                     $('#activateButton').html(activateHTML);
-                } 
-                else if (districtStatus == "Activated"){
+                }
+                else if (districtStatus == "Activated") {
                     var deactivateHTML = `
                     <a href="#" class="btn btn-danger btn-icon-split btn-lg"
                     data-toggle="modal" data-target="#deActivateModal">
@@ -231,27 +231,102 @@ function getSearchResults(searchType) {
 
     document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-primary' style = 'margin-left: 10px; margin-top: -10px'>District Accounts</span>";
 
-}   
+}
 
 
-function activateAccount(activationType, activationID){
+function activateAccount(activationType, activationID) {
 
     var years = document.getElementById('yearsInput').value;
     var months = document.getElementById('monthsInput').value;
     var days = document.getElementById('daysInput').value;
     var transactionID = document.getElementById('transactionIDInput').value;
-    var transactionAmmount = document.getElementById('transactionAmountInput').value;
+    var transactionAmount = document.getElementById('transactionAmountInput').value;
     var activationKey = document.getElementById('activationKey').value;
 
-    if(activationType == 'district'){
+    //Today's Date
+    var dateNow = new Date();
 
-        firebase.firestore().collection('Districts').doc(activationID).set({
-            "status": "Activated",
+    //Format Today's date (Activation Date)
+    var ddActivated = String(expireDate.getDate()).padStart(2, '0');
+    var mmActivated = String(expireDate.getMonth() + 1).padStart(2, '0'); 
+    var yyyyActivated = expireDate.getFullYear();
+
+    activationDateFormatted = ddActivated + '/' + mmActivated + '/' + yyyyActivated;
+
+
+    //Calculate Expire Date
+    var yearNow = dateNow.getFullYear();
+    var monthNow = dateNow.getMonth();
+    var dayNow = dateNow.getDate();
+    var expireDate = new Date(yearNow + years, monthNow + months, dayNow + days);
+
+    //Format Expire Date
+    var ddExpire = String(expireDate.getDate()).padStart(2, '0');
+    var mmExpire = String(expireDate.getMonth() + 1).padStart(2, '0'); 
+    var yyyyExpire = expireDate.getFullYear();
+
+    expireDateFormatted = mmExpire + '/' + ddExpire + '/' + yyyyExpire;
+
+    console.log(expireDate);
+    console.log(expireDateFormatted);
+
+    //Get month Abbbreviation
+    Date.prototype.monthNames = [
+        "January", "February", "March",
+        "April", "May", "June",
+        "July", "August", "September",
+        "October", "November", "December"
+    ];
+    
+    Date.prototype.getMonthName = function() {
+        return this.monthNames[this.getMonth().toLowerCase()];
+    };
+
+    Date.prototype.getShortMonthName = function () {
+        return this.getMonthName().substr(0, 3);
+    };
+    
+    var d = new Date();
+    var monthAbbreviation = d.getShortMonthName();
+
+
+    if(activationKey == 'XlNm8q/Dkxy9tdoSeexYY/sM/VQ='){
+        if (activationType == 'district') {
+
+            //Activates Plan in district Doc
+            firebase.firestore().collection('Districts').doc(activationID).collection('PlanDetails').set({
+                "planStatus": "Activated",
+                "planActivated": activationDateFormatted,
+                "planExpire": expireDateFormatted,
+                "planName" : "District Plan Yearly",
+    
+            });
             
+            //Adds transaction receipt
+            firebase.firestore().collection('TransactionManagement').doc(transactionID).set({
+                "districtID": activationID,
+                "planActivated": activationDateFormatted,
+                "planExpire": expireDateFormatted,
+                "planName" : "District Plan Yearly",
+                "transactionAmount": transactionAmount,
+                "transactionID": transactionID
+            });
 
-        });
+            //Adds new transaction to total
 
-    }
+            const increment = firebase.firestore.FieldValue.increment(transactionAmount);
+
+            var monthChild = monthAbbreviation + "Earnings";
+
+            firebase.firestore().collection('TransactionManagement').doc(transactionID).update({
+                "totalEarnings": increment,
+                monthChild: increment,
+            });
 
     
+        }
+    }
+
+
+
 }
