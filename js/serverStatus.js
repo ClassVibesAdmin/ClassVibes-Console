@@ -30,6 +30,31 @@ function getServerManagementInfo() {
 
             document.getElementById("serverChangeToggle").checked = true;
 
+            var serverLastUptime = data['serverWentUp'];
+
+            var serverLastDowntime = data['lastDownTime'];
+        //Get Server Uptime 
+
+        var startDate = new Date(serverLastDowntime);
+        // Do your operations
+        var endDate   = new Date(serverLastUptime);
+        var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
+                   
+                    given_seconds = seconds; 
+          
+                    dateObj = new Date(given_seconds * 1000); 
+                    hours = dateObj.getUTCHours(); 
+                    minutes = dateObj.getUTCMinutes(); 
+                    seconds = dateObj.getSeconds(); 
+          
+                    timeString = hours.toString().padStart(2, '0') 
+                        + ':' + minutes.toString().padStart(2, '0') 
+                        + ':' + seconds.toString().padStart(2, '0'); 
+          
+        console.log(timeString);
+
+        $('#serverUptime').html(timeString);
+
         } else if (serverStatus == false) {
 
             document.getElementById("serverChangeToggle").checked = false;
@@ -38,6 +63,8 @@ function getServerManagementInfo() {
             <span class = "badge badge-danger" style="height: 30px; width: 100px; font-size: 20px;">Offline</span>
             `;
             $('#serverStatus').html(offlineHTML);
+
+            $('#serverUptime').html("Server Down");
         } else {
 
         }
@@ -49,6 +76,9 @@ function getServerManagementInfo() {
         } else {
             $('#lastServerDownTime').html(serverLastDowntime);
         }
+
+        
+
 
 
     });
@@ -63,8 +93,12 @@ function changeServerStatus() {
 
         if (checkedStatus == true) {
 
+            var today = new Date();
+            var todayFormatted = today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate() + " " +  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
             firebase.firestore().collection("Application Management").doc("ServerManagement").update({
                 "serversAreUp": true,
+                "serverWentUp": todayFormatted,
                 
             });
 
@@ -72,7 +106,7 @@ function changeServerStatus() {
         } else {
 
             var today = new Date();
-            var todayFormatted = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            var todayFormatted = today.getFullYear() + "/" + (today.getMonth() + 1) + "/" + today.getDate() + " " +  today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 
             firebase.firestore().collection("Application Management").doc("ServerManagement").update({
                 "serversAreUp": false,
