@@ -161,7 +161,7 @@ function getSearchResults(searchType) {
                                 <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-primary"
-                                    data-dismiss="modal" onclick = "activateAccount('district', ${resultSearchText})">Activate Account</button>
+                                     onclick = "activateAccount('district', ${resultSearchText})">Activate Account</button>
                             </div>
                         </div>
                     </div>
@@ -295,6 +295,9 @@ function activateAccount(activationType, activationID) {
 
 
     if(activationKey == 'XlNm8q/Dkxy9tdoSeexYY/sM/VQ='){
+
+        $('#activationError').html("");
+
         if (activationType == 'district') {
 
             //Activates Plan in district Doc
