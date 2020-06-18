@@ -305,6 +305,12 @@ function activateAccount(activationType, activateID) {
             //Activates Plan in district Doc
 
             console.log('Activates Plan in district Doc');
+
+            firebase.firestore().collection('Districts').doc(activationID).update({
+                "status": "Activated",
+    
+            });
+
             firebase.firestore().collection('Districts').doc(activationID).collection('PlanDetails').doc('PlanDetails').set({
                 "planStatus": "Activated",
                 "planActivated": activationDateFormatted,
