@@ -70,7 +70,7 @@ function getSearchResults(searchType) {
                     `;
 
 
-                $(districtCardHTML).appendTo('#searchResultsSection');
+                $('#searchResultsSection').html(districtCardHTML);
 
                 console.log(districtStatus);
 
@@ -211,7 +211,7 @@ function getSearchResults(searchType) {
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger" onclick = "deactivate('district' ${resultSearchText})">Deactivate Account</button>
+                                <button type="button" class="btn btn-danger" onclick = "deactivate('district', '${resultSearchText}')">Deactivate Account</button>
                             </div>
                         </div>
                     </div>
@@ -423,7 +423,9 @@ function activateAccount(activationType, activateID) {
                  });
             }
 
-            $('#activateModal').modal('toggle')
+            $('#activateModal').modal('toggle');
+
+            getSearchResults('district');
 
     
         }
@@ -445,18 +447,21 @@ function deactivate(deactiveType, deactivationID){
 
     var deactivationKey = document.getElementById('deactivationKeyInput').value;
 
-    console.log("KEY CORRECT");
-
     if(deactivationKey == "XlNm8q/Dkxy9tdoSeexYY/sM/VQ==994jmc903t48h"){
+        $('#deActivationError').html("");
+
         console.log(deactivationKey);
         if(deactiveType == "district"){
             firebase.firestore().collection('Districts').doc(deactivationID.toString()).update({
                 "status": "Deactivated"
             });
+
+            $('#activateModal').modal('toggle');
+
+            getSearchResults('district');
         }
     } else {
 
-        console.log("KEY INCORRECT");
         var errorHTMLActivation = `
         <div class="alert alert-danger" role="alert">
         Deactivation Key is invalid
