@@ -25,6 +25,9 @@ function signInWithEmail(){
 
     firebase.auth().signInWithEmailAndPassword(username, password).then(function(result) {
         console.log(result);
+
+        console.log(result.uid);
+
         if(username == "admin@classvibes.net"){
             $("#loginAlert").html("");
             if(secret != secretActual){
