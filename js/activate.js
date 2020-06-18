@@ -249,6 +249,10 @@ function activateAccount(activationType, activateID) {
     var transactionAmount = document.getElementById('transactionAmountInput').value;
     var activationKey = document.getElementById('activationKey').value;
 
+    console.log(years);
+    console.log(months);
+    console.log(days);
+
     //Today's Date
     var dateNow = new Date();
 
@@ -318,7 +322,7 @@ function activateAccount(activationType, activateID) {
                 "planName" : "District Plan Yearly",
             }
 
-            firebase.firestore().collection('Districts').doc(activationID).add({
+            firebase.firestore().collection('Districts').doc(activationID).update({
                 planDetails: districtPlanDetails
     
             });
