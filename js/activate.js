@@ -238,7 +238,9 @@ function getSearchResults(searchType) {
 }
 
 
-function activateAccount(activationType, activationID) {
+function activateAccount(activationType, activateID) {
+
+    var activationID = activateID.toString()
 
     var years = document.getElementById('yearsInput').value;
     var months = document.getElementById('monthsInput').value;
