@@ -22,6 +22,9 @@
 
   <script src="js/dashboard.js"></script>
 
+  <link href = "css/switch.css" rel = "stylesheet">
+  <link href = "css/serverManagement.css" rel = "stylesheet">
+
   <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -35,6 +38,8 @@
 <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
 
+<script src = "js/serverStatus.js"></script>
+
 
 </head>
 
@@ -43,8 +48,8 @@
   <script>
       
       $(document).ready(function(){
-        initializeFirebase();
-        getDashboardData();
+        //initializeFirebase();
+        //getDashboardData();
       });
   </script>
 
@@ -66,7 +71,7 @@
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="dashboard.html">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
@@ -88,7 +93,7 @@
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="serverManagement.html">
           <i class="fas fa-wrench"></i>
           <span>Server Management</span></a>
@@ -211,7 +216,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">Server Management <span class = "badge badge-dark">BETA</span></h1>
           </div>
 
           <!-- Content Row -->
@@ -223,11 +228,13 @@
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Earnings</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id = "totalEarnings">$0</div>
+                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Server Status</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id = "serverStatus"><span class = "badge badge-success" style="height: 30px; width: 100px; font-size: 20px;">Online</span></div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-calendar fa-2x text-gray-300"></i>
+
+                        <i class="fas fa-wifi fa-2x text-gray-300"></i>
+
                     </div>
                   </div>
                 </div>
@@ -236,15 +243,15 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
+              <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Users</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800" id = "totalUsers">0</div>
+                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Last Server Downtime</div>
+                      <div class="h5 mb-0 font-weight-bold text-gray-800" id = "lastServerDownTime">0</div>
                     </div>
                     <div class="col-auto">
-                      <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        <i class="fas fa-server fa-2x text-gray-300"></i>
                     </div>
                   </div>
                 </div>
@@ -253,7 +260,7 @@
 
             <!-- Earnings (Monthly) Card Example -->
             <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-success shadow h-100 py-2">
+              <div class="card border-left-danger shadow h-100 py-2">
                 <div class="card-body">
                   <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
@@ -268,22 +275,6 @@
               </div>
             </div>
 
-            <!-- Pending Requests Card Example -->
-            <div class="col-xl-3 col-md-6 mb-4">
-              <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                  <div class="row no-gutters align-items-center">
-                    <div class="col mr-2">
-                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Requests</div>
-                      <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                    </div>
-                    <div class="col-auto">
-                      <i class="fas fa-comments fa-2x text-gray-300"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- Content Row -->
@@ -307,25 +298,42 @@
             </div>
 
             <!-- Pie Chart -->
-            <div class="col-xl-4 col-lg-5">
-              <div class="card shadow mb-4">
+            <div class="col-xl-4 col-lg-8">
+              <div class="card shadow mb-4" style="height: 94%;">
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                  <h6 class="m-0 font-weight-bold text-primary">Platforms</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">Change Server Status</h6>
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                  <div class="chart-pie pt-4 pb-2">
-                    <canvas id="platformsPieChart"></canvas>
-                  </div>
-                  <div class="mt-4 text-center small">
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Mobile
-                    </span>
-                    <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Web
-                    </span>
-                  </div>
+
+                    <h5>Server Status</h5>
+             
+                    
+
+                    <div class="switch">
+                        <input id="cmn-toggle-4" class="cmn-toggle cmn-toggle-round-flat" type="checkbox" onclick = "changeServerStatus()" checked>
+                        <label for="cmn-toggle-4" checked></label>
+                      </div>
+
+
+                      <h5>Server Manager Key</h5>
+
+                      <form>
+                        <div class="input-group">
+                            <input type="password" class="form-control bg-light border-3 small"
+                                placeholder="Server Manager Key" aria-label="Search"
+                                aria-describedby="basic-addon2" id="serverManagerKey">
+
+                        </div>
+                    </form>
+
+                    <p style="margin-top: 10px;">All server change attemps are logged.</p>
+
+                    <a href="#" class="btn btn-primary btn-icon-split btn-m" style="margin-top: 20px; position: absolute; top: 80%">
+                        <span class="text">Change Server Status</span>
+                      </a>
+
                 </div>
               </div>
             </div>
