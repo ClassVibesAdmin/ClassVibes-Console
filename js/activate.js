@@ -303,7 +303,7 @@ function activateAccount(activationType, activateID) {
         if (activationType == 'district') {
 
             //Activates Plan in district Doc
-            firebase.firestore().collection('Districts').doc(activationID).collection('PlanDetails').set({
+            firebase.firestore().collection('Districts').doc(activationID).collection('PlanDetails').doc('PlanDetails').set({
                 "planStatus": "Activated",
                 "planActivated": activationDateFormatted,
                 "planExpire": expireDateFormatted,
