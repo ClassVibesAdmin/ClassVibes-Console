@@ -27,7 +27,9 @@ function getDashboardData(){
     var mobile = value.mobileUsers;
     var web = value.webUsers;
 
-    $('#totalEarnings').html("$" + totalEarnings);
+    var roundedTotal = parseFloat(totalEarnings).toFixed(2);
+
+    $('#totalEarnings').html("$" + roundedTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     $('#totalUsers').html(totalUsers);
     $('#totalDistricts').html(districtsTotal);
 
@@ -49,20 +51,20 @@ if(mobile == 0 && web == 0){
   console.log("EARNINGS: " +  monthEarningValues.junEarnings);
 
   console.log("//////");
-  console.log(undefined ? monthEarningValues.janEarnings: 0);
+  console.log(monthEarningValues.junEarnings == undefined ? 0: monthEarningValues.junEarnings);
 
-    var jan = undefined ? monthEarningValues.janEarnings: 0;
-    var feb = undefined ? monthEarningValues.febEarnings: 0;
-    var mar = undefined ? monthEarningValues.marEarnings: 0;
-    var apr = undefined ? monthEarningValues.aprEarnings: 0;
-    var may = undefined ? monthEarningValues.mayEarnings: 0;
-    var jun = undefined ? monthEarningValues.junEarnings: 0;
-    var jul = undefined ? monthEarningValues.julEarnings: 0;
-    var aug = undefined ? monthEarningValues.augEarnings: 0;
-    var sep = undefined ? monthEarningValues.sepEarnings: 0;
-    var oct = undefined ? monthEarningValues.octEarnings: 0;
-    var nov = undefined ? monthEarningValues.novEarnings: 0;
-    var dec = undefined ? monthEarningValues.decEarnings: 0;
+    var jan = monthEarningValues.janEarnings == undefined ? 0: monthEarningValues.janEarnings;
+    var feb = monthEarningValues.febEarnings == undefined ? 0: monthEarningValues.febEarnings;
+    var mar = monthEarningValues.marEarnings == undefined ? 0: monthEarningValues.marEarnings;
+    var apr = monthEarningValues.aprEarnings == undefined ? 0: monthEarningValues.aprEarnings;
+    var may = monthEarningValues.mayEarnings == undefined ? 0: monthEarningValues.mayEarnings;
+    var jun = monthEarningValues.junEarnings == undefined ? 0: monthEarningValues.junEarnings;
+    var jul = monthEarningValues.julEarnings == undefined ? 0: monthEarningValues.julEarnings;
+    var aug = monthEarningValues.augEarnings == undefined ? 0: monthEarningValues.augEarnings;
+    var sep = monthEarningValues.sepEarnings == undefined ? 0: monthEarningValues.sepEarnings;
+    var oct = monthEarningValues.octEarnings == undefined ? 0: monthEarningValues.octEarnings;
+    var nov = monthEarningValues.novEarnings == undefined ? 0: monthEarningValues.novEarnings;
+    var dec = monthEarningValues.decEarnings == undefined ? 0: monthEarningValues.decEarnings;
 
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
@@ -219,3 +221,4 @@ var myLineChart = new Chart(ctx, {
 
   });
 }
+

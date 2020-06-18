@@ -200,15 +200,18 @@ function getSearchResults(searchType) {
                                 <input type="password"
                                     class="form-control bg-light border-0 small"
                                     placeholder="Code" aria-label="Search"
-                                    aria-describedby="basic-addon2">
+                                    aria-describedby="basic-addon2" id = "deactivationKeyInput">
+
+                                <div id = 'deActivationError' style = "margin-top: 10px">
+                                
+                                </div>
 
                                 <!--MODAL BODY END-->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-danger"
-                                    >Deactivate Account</button>
+                                <button type="button" class="btn btn-danger" onclick = "deactivate('district' ${resultSearchText})">Deactivate Account</button>
                             </div>
                         </div>
                     </div>
@@ -435,7 +438,33 @@ function activateAccount(activationType, activateID) {
 
         $('#activationError').html(errorHTMLActivation);
     }
-
-
-
 }
+
+function deactivate(deactiveType, deactivationID){
+
+
+    var deactivationKey = document.getElementById('deactivationKeyInput').value;
+
+    console.log("KEY CORRECT");
+
+    if(deactivationKey == "XlNm8q/Dkxy9tdoSeexYY/sM/VQ==994jmc903t48h"){
+        console.log(deactivationKey);
+        if(deactiveType == "district"){
+            firebase.firestore().collection('Districts').doc(deactivationID.toString()).update({
+                "status": "Deactivated"
+            });
+        }
+    } else {
+
+        console.log("KEY INCORRECT");
+        var errorHTMLActivation = `
+        <div class="alert alert-danger" role="alert">
+        Deactivation Key is invalid
+      </div>
+        `;
+
+        $('#deActivationError').html(errorHTMLActivation);
+    }
+
+  
+  }
