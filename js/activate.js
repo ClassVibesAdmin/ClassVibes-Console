@@ -208,7 +208,7 @@ function getSearchResults(searchType) {
                                 <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-danger"
-                                    data-dismiss="modal">Deactivate Account</button>
+                                    >Deactivate Account</button>
                             </div>
                         </div>
                     </div>
@@ -326,6 +326,8 @@ function activateAccount(activationType, activationID) {
                 "totalEarnings": increment,
                 monthChild: increment,
             });
+
+            $('#activateModal').modal('toggle')
 
     
         }
