@@ -45,19 +45,19 @@ if(mobile == 0 && web == 0){
   ctx.outerHTML = `<center style = 'margin-top: 23%;'><h4 style = 'color: grey'>No data</h4></center>`;
 }
   var monthEarningValues = value["updateChild"];
-    var jan = monthEarningValues.janEarnings;
-    var feb = monthEarningValues.febEarnings;
-    var mar = monthEarningValues.marEarnings;
-    var apr = monthEarningValues.aprEarnings;
-    var may = monthEarningValues.mayEarnings;
-    var jun = monthEarningValues.junEarnings;
-    var jul = monthEarningValues.julEarnings;
-    var aug = monthEarningValues.augEarnings;
-    var sep = monthEarningValues.sepEarnings;
-    var oct = monthEarningValues.octEarnings;
-    var nov = monthEarningValues.novEarnings;
-    var dec = monthEarningValues.decEarnings;
 
+    var jan = undefined ? monthEarningValues.janEarnings: 0;
+    var feb = undefined ? monthEarningValues.febEarnings: 0;
+    var mar = undefined ? monthEarningValues.marEarnings: 0;
+    var apr = undefined ? monthEarningValues.aprEarnings: 0;
+    var may = undefined ? monthEarningValues.mayEarnings: 0;
+    var jun = undefined ? monthEarningValues.junEarnings: 0;
+    var jul = undefined ? monthEarningValues.julEarnings: 0;
+    var aug = undefined ? monthEarningValues.augEarnings: 0;
+    var sep = undefined ? monthEarningValues.sepEarnings: 0;
+    var oct = undefined ? monthEarningValues.octEarnings: 0;
+    var nov = undefined ? monthEarningValues.novEarnings: 0;
+    var dec = undefined ? monthEarningValues.decEarnings: 0;
 
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
