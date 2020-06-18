@@ -311,11 +311,15 @@ function activateAccount(activationType, activateID) {
     
             });
 
-            firebase.firestore().collection('Districts').doc(activationID).collection('PlanDetails').doc('PlanDetails').set({
+            var districtPlanDetails = {
                 "planStatus": "Activated",
                 "planActivated": activationDateFormatted,
                 "planExpire": expireDateFormatted,
                 "planName" : "District Plan Yearly",
+            }
+
+            firebase.firestore().collection('Districts').doc(activationID).set({
+                planDetails: districtPlanDetails
     
             });
             
