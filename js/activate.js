@@ -456,13 +456,13 @@ function deactivate(deactiveType, deactivationID){
                 "status": "Deactivated"
             });
 
-            $('#activateModal').modal('toggle');
+            $('#deActivateModal').modal('toggle');
 
-            //document.getElementById('loadingIndicator').style.display = "none";
+            document.getElementById('loadingIndicator').style.display = "none";
 
             setTimeout(function(){
-                //getSearchResults('district');
-                //document.getElementById('searchResults').style.display = "initial";
+                getSearchResults('district');
+                document.getElementById('searchResults').style.display = "initial";
            }, 2000); 
             
         }
