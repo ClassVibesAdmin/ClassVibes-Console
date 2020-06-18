@@ -318,7 +318,7 @@ function activateAccount(activationType, activateID) {
                 "planName" : "District Plan Yearly",
             }
 
-            firebase.firestore().collection('Districts').doc(activationID).set({
+            firebase.firestore().collection('Districts').doc(activationID).add({
                 planDetails: districtPlanDetails
     
             });
