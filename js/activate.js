@@ -337,7 +337,9 @@ function activateAccount(activationType, activateID) {
 
             var monthChild = monthAbbreviation + "Earnings";
 
-            var updateChild = {monthChild, increment}
+            var updateChild = {};
+
+            updateChild[monthChild] = increment
 
             console.log('Adds new transaction to total');
 
