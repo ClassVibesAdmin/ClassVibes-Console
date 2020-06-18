@@ -347,12 +347,12 @@ function activateAccount(activationType, activateID) {
 
             var updateChild = {};
 
-            updateChild[monthChild] = increment
+            updateChild.monthChild = increment
 
             console.log('Adds new transaction to total');
 
             firebase.firestore().collection('Application Management').doc('Statistics').update({
-                "totalEarnings": increment,
+               "totalEarnings": increment,
                 updateChild
             });
 
