@@ -333,7 +333,7 @@ function activateAccount(activationType, activateID) {
 
             console.log('Adds new transaction to total');
 
-            firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).update({
+            firebase.firestore().collection('Application Management').doc('Statistics').update({
                 "totalEarnings": increment,
                 monthChild: increment,
             });
