@@ -303,6 +303,8 @@ function activateAccount(activationType, activateID) {
         if (activationType == 'district') {
 
             //Activates Plan in district Doc
+
+            console.log('Activates Plan in district Doc');
             firebase.firestore().collection('Districts').doc(activationID).collection('PlanDetails').doc('PlanDetails]').set({
                 "planStatus": "Activated",
                 "planActivated": activationDateFormatted,
@@ -312,6 +314,8 @@ function activateAccount(activationType, activateID) {
             });
             
             //Adds transaction receipt
+
+            console.log('Adds transaction receipt');
             firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).set({
                 "districtID": activationID,
                 "planActivated": activationDateFormatted,
@@ -326,6 +330,8 @@ function activateAccount(activationType, activateID) {
             const increment = firebase.firestore.FieldValue.increment(Number(transactionAmount));
 
             var monthChild = monthAbbreviation + "Earnings";
+
+            console.log('Adds new transaction to total');
 
             firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).update({
                 "totalEarnings": increment,
