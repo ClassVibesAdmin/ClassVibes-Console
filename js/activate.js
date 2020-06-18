@@ -353,8 +353,72 @@ function activateAccount(activationType, activateID) {
 
             firebase.firestore().collection('Application Management').doc('Statistics').update({
                "totalEarnings": increment,
-                updateChild
             });
+
+            if(monthChild == "janEarnings"){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "janEarnings": increment,
+                 });
+            } 
+
+            else if(monthChild == 'febEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "febEarnings": increment,
+                 });
+            }
+
+            else if(monthChild == 'marEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "marEarnings": increment,
+                 });
+            }
+
+            else if(monthChild == 'aprEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "aprEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'mayEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "mayEarnings": increment,
+                 }); 
+            }
+            else if(monthChild == 'junEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "junEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'julEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "julEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'augEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "augEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'sepEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "sepEarnings": increment,
+                 });
+            }
+
+            else if(monthChild == 'octEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "octEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'novEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "novEarnings": increment,
+                 });
+            }
+            else if(monthChild == 'decEarnings'){
+                firebase.firestore().collection('Application Management').doc('Statistics').update({
+                    "decEarnings": increment,
+                 });
+            }
 
             $('#activateModal').modal('toggle')
 

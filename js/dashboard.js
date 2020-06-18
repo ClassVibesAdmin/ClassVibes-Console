@@ -44,19 +44,19 @@ console.log(web);
 if(mobile == 0 && web == 0){
   ctx.outerHTML = `<center style = 'margin-top: 23%;'><h4 style = 'color: grey'>No data</h4></center>`;
 }
-
-    var jan = value.janEarnings;
-    var feb = value.febEarnings;
-    var mar = value.marEarnings;
-    var apr = value.aprEarnings;
-    var may = value.mayEarnings;
-    var jun = value.junEarnings;
-    var jul = value.julEarnings;
-    var aug = value.augEarnings;
-    var sep = value.sepEarnings;
-    var oct = value.octEarnings;
-    var nov = value.novEarnings;
-    var dec = value.decEarnings;
+  var monthEarningValues = value["updateChild"];
+    var jan = monthEarningValues.janEarnings;
+    var feb = monthEarningValues.febEarnings;
+    var mar = monthEarningValues.marEarnings;
+    var apr = monthEarningValues.aprEarnings;
+    var may = monthEarningValues.mayEarnings;
+    var jun = monthEarningValues.junEarnings;
+    var jul = monthEarningValues.julEarnings;
+    var aug = monthEarningValues.augEarnings;
+    var sep = monthEarningValues.sepEarnings;
+    var oct = monthEarningValues.octEarnings;
+    var nov = monthEarningValues.novEarnings;
+    var dec = monthEarningValues.decEarnings;
 
 
 var myPieChart = new Chart(ctx, {
