@@ -44,7 +44,9 @@ console.log(web);
 if(mobile == 0 && web == 0){
   ctx.outerHTML = `<center style = 'margin-top: 23%;'><h4 style = 'color: grey'>No data</h4></center>`;
 }
-  var monthEarningValues = value["updateChild"];
+  var monthEarningValues = value;
+
+  console.log("EARNINGS: " + undefined ? monthEarningValues.junEarnings: 0);
 
     var jan = undefined ? monthEarningValues.janEarnings: 0;
     var feb = undefined ? monthEarningValues.febEarnings: 0;
