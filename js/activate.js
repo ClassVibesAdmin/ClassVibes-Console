@@ -151,6 +151,10 @@ function getSearchResults(searchType) {
                                     placeholder="Code" aria-label="Search"
                                     aria-describedby="basic-addon2" id = "activationKey">
 
+                                    <div id = "activationError" style = "margin-top: 10px">
+                                   
+                                    </div>
+
                                 <!--MODAL BODY END-->
                             </div>
                             <div class="modal-footer">
@@ -327,6 +331,14 @@ function activateAccount(activationType, activationID) {
         }
     } else {
         console.log("Activation ID Is invalid");
+
+        var errorHTMLActivation = `
+        <div class="alert alert-danger" role="alert">
+        Activation Key is invalid
+      </div>
+        `;
+
+        $('#activationError').html(errorHTMLActivation);
     }
 
 
