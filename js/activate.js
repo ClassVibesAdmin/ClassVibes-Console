@@ -106,7 +106,7 @@ function getSearchResults(searchType) {
                                         <input type="text"
                                             class="form-control bg-light border-0 small"
                                             placeholder="Years" aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                            aria-describedby="basic-addon2" id = "yearsInput">
 
                                     </div>
 
@@ -114,7 +114,7 @@ function getSearchResults(searchType) {
                                         <input type="text"
                                             class="form-control bg-light border-0 small"
                                             placeholder="Months" aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                            aria-describedby="basic-addon2" id = "monthsInput">
 
                                     </div>
 
@@ -122,7 +122,7 @@ function getSearchResults(searchType) {
                                         <input type="text"
                                             class="form-control bg-light border-0 small"
                                             placeholder="Days" aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                            aria-describedby="basic-addon2" id = "daysInput">
 
                                     </div>
 
@@ -133,7 +133,7 @@ function getSearchResults(searchType) {
                                 <input type="text"
                                     class="form-control bg-light border-0 small"
                                     placeholder="ID" aria-label="Search"
-                                    aria-describedby="basic-addon2">
+                                    aria-describedby="basic-addon2" id = "transactionIDInput">
 
 
                                     <h6 style="margin-top: 20px;">Transaction Amount</h6>
@@ -141,7 +141,7 @@ function getSearchResults(searchType) {
                                     <input type="text"
                                         class="form-control bg-light border-0 small"
                                         placeholder="Ammount" aria-label="Search"
-                                        aria-describedby="basic-addon2">
+                                        aria-describedby="basic-addon2" id = "transactionAmountInput">
 
 
                                 <h6 style="margin-top: 20px;">Activation Key</h6>
@@ -149,7 +149,7 @@ function getSearchResults(searchType) {
                                 <input type="password"
                                     class="form-control bg-light border-0 small"
                                     placeholder="Code" aria-label="Search"
-                                    aria-describedby="basic-addon2">
+                                    aria-describedby="basic-addon2" id = "activationKey">
 
                                 <!--MODAL BODY END-->
                             </div>
@@ -157,7 +157,7 @@ function getSearchResults(searchType) {
                                 <button type="button" class="btn btn-secondary"
                                     data-dismiss="modal">Cancel</button>
                                 <button type="button" class="btn btn-primary"
-                                    data-dismiss="modal">Activate Account</button>
+                                    data-dismiss="modal" onclick = "activateAccount('district', ${resultSearchText})">Activate Account</button>
                             </div>
                         </div>
                     </div>
@@ -232,3 +232,26 @@ function getSearchResults(searchType) {
     document.getElementById('searchHeaderResults').innerHTML = "Search Results for " + resultSearchText + "<span class = 'badge badge-primary' style = 'margin-left: 10px; margin-top: -10px'>District Accounts</span>";
 
 }   
+
+
+function activateAccount(activationType, activationID){
+
+    var years = document.getElementById('yearsInput').value;
+    var months = document.getElementById('monthsInput').value;
+    var days = document.getElementById('daysInput').value;
+    var transactionID = document.getElementById('transactionIDInput').value;
+    var transactionAmmount = document.getElementById('transactionAmountInput').value;
+    var activationKey = document.getElementById('activationKey').value;
+
+    if(activationType == 'district'){
+
+        firebase.firestore().collection('Districts').doc(activationID).set({
+            "status": "Activated",
+            
+
+        });
+
+    }
+
+    
+}
