@@ -64,6 +64,11 @@ function getSearchResults(searchType) {
                             </div>
                         </div>
                         `;
+
+
+                        $(districtCardHTML).appendTo('#searchResultsSection');
+
+
                     
 
                     if(districtStatus == "Deactivated"){
