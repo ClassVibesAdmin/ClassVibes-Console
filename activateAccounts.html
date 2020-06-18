@@ -37,7 +37,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase.js"></script>
 
-    <link href = 'css/loader.css' rel = "stylesheet">
+    <link href='css/loader.css' rel="stylesheet">
 
 
 </head>
@@ -231,121 +231,260 @@
 
                             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <li class="nav-item">
-                                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">District</a>
+                                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home"
+                                        role="tab" aria-controls="pills-home" aria-selected="true">District</a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Teacher</a>
+                                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile"
+                                        role="tab" aria-controls="pills-profile" aria-selected="false">Teacher</a>
                                 </li>
-                            
-                              </ul>
-                        
+
+                            </ul>
+
                         </div>
 
                         <div class="d-flex justify-content-center">
 
-                              <div class="tab-content" id="pills-tabContent">
-                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="tab-content" id="pills-tabContent">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                                    aria-labelledby="pills-home-tab">
                                     <center style="margin-top: 2%;">
                                         <!-- Search -->
                                         <form
                                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-6 my-4 my-md-0 mw-100 navbar-search">
                                             <div class="input-group">
                                                 <input type="text" class="form-control bg-light border-3 small"
-                                                    placeholder="District code.." aria-label="Search" aria-describedby="basic-addon2" id = "searchInput">
+                                                    placeholder="District code.." aria-label="Search"
+                                                    aria-describedby="basic-addon2" id="searchInput">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="button" onclick = "getSearchResults('district')">
+                                                    <button class="btn btn-primary" type="button"
+                                                        onclick="getSearchResults('district')">
                                                         <i class="fas fa-search fa-sm"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </form>
-            
+
                                     </center>
                                 </div>
 
-                                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                                    aria-labelledby="pills-profile-tab">
                                     <center style="margin-top: 2%;">
                                         <!-- Search -->
                                         <form
                                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-6 my-4 my-md-0 mw-100 navbar-search">
                                             <div class="input-group">
                                                 <input type="text" class="form-control bg-light border-3 small"
-                                                    placeholder="Teacher Email" aria-label="Search" aria-describedby="basic-addon2" id = "searchInput">
+                                                    placeholder="Teacher Email" aria-label="Search"
+                                                    aria-describedby="basic-addon2" id="searchInput">
                                                 <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="button" onclick = "getSearchResults('teacher')">
+                                                    <button class="btn btn-primary" type="button"
+                                                        onclick="getSearchResults('teacher')">
                                                         <i class="fas fa-search fa-sm"></i>
                                                     </button>
                                                 </div>
                                             </div>
                                         </form>
-            
+
                                     </center>
                                 </div>
-                              </div>
+                            </div>
                         </div>
 
                     </section>
 
-                    <section id = "loadingIndicator" style="display: none;">
+                    <section id="loadingIndicator" style="display: none;">
                         <center style="margin-top: 25%;">
                             <div class="sk-folding-cube">
                                 <div class="sk-cube1 sk-cube"></div>
                                 <div class="sk-cube2 sk-cube"></div>
                                 <div class="sk-cube4 sk-cube"></div>
                                 <div class="sk-cube3 sk-cube"></div>
-                              </div>
+                            </div>
                         </center>
                     </section>
 
                     <section id="searchResults" style="display: initial;">
                         <!-- Page Heading -->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800" id = "searchHeaderResults" style="margin-left: 10px;">Search Results for </h1>
+                            <h1 class="h3 mb-0 text-gray-800" id="searchHeaderResults" style="margin-left: 10px;">Search
+                                Results for </h1>
                         </div>
 
-                        
-                        <div id = "searchResultsSection">
+
+                        <div id="searchResultsSection">
                             <div class="col-xl-12 col-md-8 mb-4">
                                 <div class="card border-left-primary shadow h-100 py-2">
-                                  <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                      <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">District</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Lammersville Unified School District</div>
-                                      </div>
-                                      <div class="col-auto">
-                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            
-                        </div>
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    District</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">Lammersville Unified
+                                                    School District</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <section id='activateButton'>
+                                                    <!-- Button trigger modal -->
 
+                                                    <a href="#" class="btn btn-primary btn-icon-split btn-lg"
+                                                        data-toggle="modal" data-target="#activateModal">
+                                                        <span class="text">Activate</span>
+                                                    </a>
+
+                                                    <a href="#" class="btn btn-danger btn-icon-split btn-lg"
+                                                        data-toggle="modal" data-target="#deActivateModal">
+                                                        <span class="text">Deactivate</span>
+                                                    </a>
+
+                                                    <!-- Activation Modal -->
+                                                    <div class="modal fade" id="activateModal" tabindex="-1"
+                                                        role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Activate District</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <!--MODAL BODY START-->
+                                                                    <h6>Activation Valid For</h6>
+
+
+                                                                    <div class="row">
+
+                                                                        <div class="col">
+                                                                            <input type="text"
+                                                                                class="form-control bg-light border-0 small"
+                                                                                placeholder="Years" aria-label="Search"
+                                                                                aria-describedby="basic-addon2">
+
+                                                                        </div>
+
+                                                                        <div class="col">
+                                                                            <input type="text"
+                                                                                class="form-control bg-light border-0 small"
+                                                                                placeholder="Months" aria-label="Search"
+                                                                                aria-describedby="basic-addon2">
+
+                                                                        </div>
+
+                                                                        <div class="col">
+                                                                            <input type="text"
+                                                                                class="form-control bg-light border-0 small"
+                                                                                placeholder="Days" aria-label="Search"
+                                                                                aria-describedby="basic-addon2">
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                    <h6 style="margin-top: 20px;">Transaction ID</h6>
+
+                                                                    <input type="text"
+                                                                        class="form-control bg-light border-0 small"
+                                                                        placeholder="ID" aria-label="Search"
+                                                                        aria-describedby="basic-addon2">
+
+
+                                                                    <h6 style="margin-top: 20px;">Activation Key</h6>
+
+                                                                    <input type="password"
+                                                                        class="form-control bg-light border-0 small"
+                                                                        placeholder="Code" aria-label="Search"
+                                                                        aria-describedby="basic-addon2">
+
+                                                                    <!--MODAL BODY END-->
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-primary"
+                                                                        data-dismiss="modal">Activate Account</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--DEACTIVATION MODAL-->
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="deActivateModal" tabindex="-1"
+                                                        role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Deactivate District</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <!--MODAL BODY START-->
+
+                                                                    <h6 style="margin-top: 10px;">Deactivation Key</h6>
+
+                                                                    <input type="password"
+                                                                        class="form-control bg-light border-0 small"
+                                                                        placeholder="Code" aria-label="Search"
+                                                                        aria-describedby="basic-addon2">
+
+                                                                    <!--MODAL BODY END-->
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        data-dismiss="modal">Deactivate Account</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
                     </section>
 
-
-
-
                 </div>
-                <!-- /.container-fluid -->
-
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; ClassVibes 2020. All Rights Reserved.</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
-
         </div>
-        <!-- End of Content Wrapper -->
+    </div>
+    </div>
+
+    </div>
+
+    </section>
+
+
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; ClassVibes 2020. All Rights Reserved.</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
 
     </div>
     <!-- End of Page Wrapper -->
