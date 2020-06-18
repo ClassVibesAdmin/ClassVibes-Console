@@ -425,7 +425,14 @@ function activateAccount(activationType, activateID) {
 
             $('#activateModal').modal('toggle');
 
-            getSearchResults('district');
+            document.getElementById('loadingIndicator').style.display = "initial";
+            document.getElementById('searchResults').style.display = "none";
+
+            setTimeout(function(){
+                getSearchResults('district');
+                document.getElementById('searchResults').style.display = "initial";
+                document.getElementById('loadingIndicator').style.display = "none";
+           }, 2000); 
 
     
         }
