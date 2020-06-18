@@ -46,7 +46,10 @@ if(mobile == 0 && web == 0){
 }
   var monthEarningValues = value;
 
-  console.log("EARNINGS: " + undefined ? monthEarningValues.junEarnings: 0);
+  console.log("EARNINGS: " +  monthEarningValues.junEarnings);
+
+  console.log("//////");
+  console.log(undefined ? monthEarningValues.janEarnings: 0);
 
     var jan = undefined ? monthEarningValues.janEarnings: 0;
     var feb = undefined ? monthEarningValues.febEarnings: 0;
