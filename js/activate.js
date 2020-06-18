@@ -552,6 +552,7 @@ function activateAccount(activationType, activateID) {
             console.log('Adds transaction receipt');
             firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).set({
                 "districtID": activationID,
+                "Account Type": "District",
                 "planActivated": activationDateFormatted,
                 "planExpire": expireDateFormatted,
                 "planName" : "District Plan Yearly",
@@ -681,7 +682,8 @@ function activateAccount(activationType, activateID) {
             console.log('Adds transaction receipt');
 
             firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).set({
-                "districtID": activationID,
+                "teacherEmail": activationID,
+                "Account Type": "District",
                 "planActivated": activationDateFormatted,
                 "planExpire": expireDateFormatted,
                 "planName" : "Teacher Plan Monthly",
@@ -776,7 +778,7 @@ function activateAccount(activationType, activateID) {
             document.getElementById('searchResults').style.display = "none";
 
             setTimeout(function(){
-                getSearchResults('district');
+                getSearchResults('teacher');
                 document.getElementById('searchResults').style.display = "initial";
                 document.getElementById('loadingIndicator').style.display = "none";
            }, 2000); 
@@ -832,7 +834,7 @@ function deactivate(deactiveType, deactivationID){
             document.getElementById('searchResults').style.display = "none";
 
             setTimeout(function(){
-                getSearchResults('district');
+                getSearchResults('teacher');
                 document.getElementById('searchResults').style.display = "initial";
                 document.getElementById('loadingIndicator').style.display = "none";
            }, 2000); 
