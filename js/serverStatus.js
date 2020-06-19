@@ -37,7 +37,7 @@ function getServerManagementInfo() {
 
         var startDate = new Date(serverLastDowntime);
         // Do your operations
-        var endDate   = new Date(serverLastUptime);
+        var endDate   = new Date();
         var seconds = (endDate.getTime() - startDate.getTime()) / 1000;
                    
                     given_seconds = seconds; 
