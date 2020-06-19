@@ -138,13 +138,12 @@ function changeServerStatus() {
 function sendServerAlert() {
     var title = document.getElementById('alertTitle').value;
     var message = document.getElementById('alertDescription').value;
-    var alertHours = document.getElementById('alertHours').value;
     var alertMinutes = document.getElementById('alertMinutes').value;
     var alertSeconds = document.getElementById('alertSeconds').value;
     var serverManagerKey = document.getElementById('serverManagerKeyAlertInput').value;
 
 
-    if (title, message, alertHours, alertMinutes, alertSeconds, serverManagerKey == '') {
+    if (title, message, alertMinutes, alertSeconds, serverManagerKey == '') {
         var alertHTML = `
         <div class="alert alert-danger" role="alert">
         You cannot leave any fields blank
@@ -165,7 +164,7 @@ function sendServerAlert() {
             document.getElementById('waitSection').style.display = "initial";
             document.getElementById('alertInput').style.display = "none";
 
-            var time = Number(alertSeconds) + (Number(alertMinutes) * 60) + (Number(alertHours) * 60 * 60),
+            var time = Number(alertSeconds) + (Number(alertMinutes) * 60)
 
             display = document.querySelector('#time');
             startTimer(time, display);
@@ -182,7 +181,7 @@ function sendServerAlert() {
 
 }
 
-function startTimer(duration, display) {
+function startTimer(duration) {
     var timer = duration, minutes, seconds;
 
     setInterval(function () {
@@ -193,6 +192,8 @@ function startTimer(duration, display) {
         seconds = seconds < 10 ? "0" + seconds : seconds;
 
         console.log(minutes + ":" + seconds);
+
+        document.getElementById("time").innerText = minutes + ":" + seconds;
 
         if (--timer < 0) {
             timer = duration;
