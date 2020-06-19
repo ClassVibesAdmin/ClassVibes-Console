@@ -470,13 +470,9 @@ function activateAccount(activationType, activateID) {
     var transactionAmount = document.getElementById('transactionAmountInput').value;
     var activationKey = document.getElementById('activationKey').value;
 
-    console.log(years);
-    console.log(months);
-    console.log(days);
-
-    years = 1;
-    months = 0;
-    days = 0;
+    console.log("YEARS:" + years);
+    console.log("Months:" + months);
+    console.log("days:" + days);
     
     //Today's Date
     var dateNow = new Date();
@@ -493,7 +489,7 @@ function activateAccount(activationType, activateID) {
     var yearNow = dateNow.getFullYear();
     var monthNow = dateNow.getMonth();
     var dayNow = dateNow.getDate();
-    var expireDate = new Date(yearNow + years, monthNow + months, dayNow + days);
+    var expireDate = new Date(yearNow + Number(years), monthNow + Number(months), dayNow + Number(days));
 
     //Format Expire Date
     var ddExpire = String(expireDate.getDate()).padStart(2, '0');
