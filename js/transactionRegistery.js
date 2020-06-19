@@ -105,7 +105,7 @@ function getSearchResultsReciepts() {
 
                       <div class="col">
                         <h5 style="font-weight: 700;">Transaction Amount</h5>
-                        <h5 id="transactionAmount">${transactionAmount}</h5>
+                        <h5 id="transactionAmount">\$${transactionAmount}</h5>
                       </div>
                     </div>
                   </div>

@@ -465,6 +465,7 @@ function activateAccount(activationType, activateID) {
     var years = document.getElementById('yearsInput').value;
     var months = document.getElementById('monthsInput').value;
     var days = document.getElementById('daysInput').value;
+
     var transactionID = document.getElementById('transactionIDInput').value;
     var transactionAmount = document.getElementById('transactionAmountInput').value;
     var activationKey = document.getElementById('activationKey').value;
@@ -473,6 +474,10 @@ function activateAccount(activationType, activateID) {
     console.log(months);
     console.log(days);
 
+    years = 1;
+    months = 0;
+    days = 0;
+    
     //Today's Date
     var dateNow = new Date();
 
@@ -481,7 +486,7 @@ function activateAccount(activationType, activateID) {
     var mmActivated = String(dateNow.getMonth() + 1).padStart(2, '0'); 
     var yyyyActivated = dateNow.getFullYear();
 
-    activationDateFormatted = ddActivated + '/' + mmActivated + '/' + yyyyActivated;
+    activationDateFormatted =  mmActivated + '/' +  ddActivated + '/' + yyyyActivated;
 
 
     //Calculate Expire Date
@@ -499,6 +504,7 @@ function activateAccount(activationType, activateID) {
 
     console.log(expireDate);
     console.log(expireDateFormatted);
+
 
     //Get month Abbbreviation
     Date.prototype.monthNames = [
@@ -551,7 +557,7 @@ function activateAccount(activationType, activateID) {
 
             console.log('Adds transaction receipt');
             firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).set({
-                "districtID": activationID,
+                "Recipient ID": activationID,
                 "Account Type": "District",
                 "planActivated": activationDateFormatted,
                 "planExpire": expireDateFormatted,
@@ -682,7 +688,7 @@ function activateAccount(activationType, activateID) {
             console.log('Adds transaction receipt');
 
             firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).set({
-                "teacherEmail": activationID,
+                "Recipient ID": activationID,
                 "Account Type": "District",
                 "planActivated": activationDateFormatted,
                 "planExpire": expireDateFormatted,
