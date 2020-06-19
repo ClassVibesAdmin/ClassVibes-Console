@@ -198,6 +198,10 @@ function startTimer(duration) {
         if (--timer < 0) {
             timer = duration;
             console.log("timer done");
+
+            firebase.firestore().collection('ApplicationManagement').doc("ServerAlerts").delete();
+
+            location.reload();
         }
     }, 1000);
 }
