@@ -1,3 +1,19 @@
+function initializeFirebase() {
+    var firebaseConfig = {
+        apiKey: "AIzaSyA2ESJBkNRjibHsQr2UTHtyYPslzNleyXw",
+        authDomain: "cyberdojo-a2a3e.firebaseapp.com",
+        databaseURL: "https://cyberdojo-a2a3e.firebaseio.com",
+        projectId: "cyberdojo-a2a3e",
+        storageBucket: "cyberdojo-a2a3e.appspot.com",
+        messagingSenderId: "938057332518",
+        appId: "1:938057332518:web:99c34da5abf1b1548533e7",
+        measurementId: "G-0EWJ1V40VX"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+}
+
 function getSearchResultsReciepts() {
     var result = document.getElementById('searchInputReciepts').value;
 
@@ -17,7 +33,7 @@ function getSearchResultsReciepts() {
     document.getElementById('searchPage').style.display = "none";
     document.getElementById('loadingIndicator').style.display = "initial";
 
-    firebase.firestore().collection("Transaction Management").doc(result.toString()).get().then((documentSnapshot) => {
+    firebase.firestore().collection("TransactionManagement").doc(result.toString()).get().then((documentSnapshot) => {
         var data = documentSnapshot.data();
 
         if (data == null || data == undefined) { //NO SEARCH RESULTS
@@ -31,6 +47,8 @@ function getSearchResultsReciepts() {
             var planExpires = data['planExpire'];
             var planName = data['planName'];
             var transactionAmount = data['transactionAmount'];
+
+            console.log("RESULTS FOUND");
 
             var resultsHTML = `
             
