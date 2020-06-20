@@ -156,7 +156,7 @@ function sendServerAlert() {
 
             $('#alertSendError').html("");
 
-            firebase.firestore().collection('ApplicationManagement').doc("ServerAlerts").set({
+            firebase.firestore().collection('Application Management').doc("ServerAlerts").set({
                 alertTitle: title,
                 alertMessage: message, 
             });
@@ -199,7 +199,7 @@ function startTimer(duration) {
             timer = duration;
             console.log("timer done");
 
-            firebase.firestore().collection('ApplicationManagement').doc("ServerAlerts").delete();
+            firebase.firestore().collection('Application Management').doc("ServerAlerts").delete();
 
             location.reload();
         }
