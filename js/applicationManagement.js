@@ -20,34 +20,39 @@ function getLiveSeverAlerts(){
 
         var data = result.data();
 
-        var toastHTML = `
-        <div aria-live="polite" aria-atomic="true" style="position: absolute; min-height: 200px;">
-  <div class="toast" style="position: absolute; top: 0; right: 100%;" id = "alertToast">
-    <div class="toast-header">
-      <img src="..." class="rounded mr-2" alt="...">
-      <strong class="mr-auto">Bootstrap</strong>
-      <small>11 mins ago</small>
-      <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="toast-body">
-      Hello, world! This is a toast message.
-    </div>
-  </div>
-</div>
-        `;
-
-        $(toastHTML).appendTo('#pageBody');
-
-        $('#alertToast').toast('show')
-
-
-
         if(data == undefined || data == null){
            
         } else {
-            $(toastHTML).appendTo('#pageBody');
+          var title = data.alertTitle;
+          var message = data.alertMessage;
+  
+          var toastHTML = `
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-cloud"></i> Server Alert</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <h1>${title}</h1>
+                  <p>${message}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          `;
+
+          $(toastHTML).appendTo('#pageBody');
+  
+          $('#exampleModal').modal('show')
         }
 
         console.log(data);
