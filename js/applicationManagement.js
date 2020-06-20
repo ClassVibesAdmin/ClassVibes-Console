@@ -58,3 +58,15 @@ function getLiveSeverAlerts(){
         console.log(data);
     });
 }
+
+function getServerStatus(){
+  firebase.firestore().collection('Application Management').doc("ServerManagement").onSnapshot(function(result){
+
+      var data = result.data()["serversAreUp"];
+
+      if(data == false || data == null){
+          window.location = "serverDown.html";
+      } 
+      
+  });
+}
