@@ -70,3 +70,21 @@ function getServerStatus(){
       
   });
 }
+
+function verifyUserAuthStatus(){
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      
+    } else {
+      window.location = "index.html";
+    }
+  });
+}
+
+function signOut(){
+  firebase.auth().signOut().then(function() {
+    window.location = "index.html";
+  }, function(error) {
+    // An error happened.
+  });
+}
