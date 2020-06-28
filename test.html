@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <title>Helloo</title>
+
+        <script src="js/aes.js"></script>
+    </head>
+    <body>
+
+    </body>
+
+    <script>
+
+        console.log("message");
+
+        var AES_KEY = `
+        MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC7EiRUS/MhtKsEGNIq6zGsoWhE
+        0hqRK8YbBEbWJP1u+Olec5c0+CNdHt+y6oBC5wphQrpDrVQWwJgHRa6sRJMgwDz8
+        XKV1hUMBhxcfPICA60OyBR5lo/vZC8GwQIhJJBgF4EHjkFuvccYLNlLdSAzLTsVj
+        GSs9e0fkp+LX193UXQIDAQAB
+        `;
+
+        var encrypted = CryptoJS.AES.encrypt("Message", AES_KEY);
+        //U2FsdGVkX18ZUVvShFSES21qHsQEqZXMxQ9zgHy+bu0=
+
+        console.log("Encrypted:" + encrypted);
+
+        var decrypted = CryptoJS.AES.decrypt(encrypted, AES_KEY);
+
+        console.log("Decrypted:" + decrypted.toString(CryptoJS.enc.Utf8));
+
+        //4d657373616765
+
+
+    </script>
+</html>
