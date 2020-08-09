@@ -839,7 +839,8 @@ function deactivate(deactiveType, deactivationID){
             
         } else if(deactiveType == 'teacher'){
             firebase.firestore().collection('UserData').doc(deactivationID.toString()).update({
-                "account status": "Deactivated"
+                "account status": "Deactivated",
+                'plan expire date': firebase.firestore.FieldValue.delete()
             });
 
             $('#deActivateModal').modal('toggle');
