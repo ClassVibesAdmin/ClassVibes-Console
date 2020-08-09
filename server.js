@@ -6,6 +6,7 @@ const firebase = require('firebase');
 const ejs = require('ejs')
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
+var speakeasy = require("speakeasy");
 
 
 ////////////////////////////////////////
@@ -26,20 +27,38 @@ router.get('/login',function(req,res){
   res.sendFile(path.join(__dirname+'/index.html'));
 });
 
-router.get('/login-teacher',function(req,res){
-  res.sendFile(path.join(__dirname+'/app/authentication/teacherLogin.html'));
+router.get('/dashboard',function(req,res){
+  res.sendFile(path.join(__dirname+'/dashboard.html'));
 });
 
-router.get('/login-district',function(req,res){
-  res.sendFile(path.join(__dirname+'/app/authentication/districtLogin.html'));
+router.get('/activate',function(req,res){
+  res.sendFile(path.join(__dirname+'/activateAccounts.html'));
   });
 
-router.get('/login',function(req,res){
-res.sendFile(path.join(__dirname+'/app/authentication/loginOptions.html'));
+router.get('/manage',function(req,res){
+res.sendFile(path.join(__dirname+'/serverManagement.html'));
 });
 
-router.get('/signup',function(req,res){
-  res.sendFile(path.join(__dirname+'/app/authentication/signup.html'));
+router.get('/registry',function(req,res){
+  res.sendFile(path.join(__dirname+'/transactionRegistry.html'));
+  });
+
+router.get('/verifyAuth-2FA',function(req,res){
+  var userToken = req.query.userToken
+
+  var secret = 'IMZEWNDIJM4WY3DYKESF2ZT2PFUWS3SN'
+
+  var verified = speakeasy.totp.verify({
+    secret: secret,
+    encoding: 'base32',
+    token: userToken
+  });
+
+  console.log(verified)
+
+    res.send(verified)
+
+ 
   });
 
 
