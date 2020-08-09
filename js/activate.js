@@ -697,7 +697,7 @@ function activateAccount(activationType, activateID) {
 
             firebase.firestore().collection('TransactionManagement').doc(transactionID.toString()).set({
                 "Recipient ID": activationID,
-                "Account Type": "District",
+                "Account Type": "Solo Teacher",
                 "planActivated": activationDateFormatted,
                 "planExpire": expireDateFormatted,
                 "planName" : "Teacher Plan Monthly",
