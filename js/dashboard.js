@@ -25,7 +25,7 @@ function getDashboardData(){
 
   })
     
-  firebase.firestore().collection("Application Management").doc("Statistics").get().then((documentSnapshot) => {
+  firebase.firestore().collection("Application Management").doc("Statistics").onSnapshot((documentSnapshot) => {
 
     var value = documentSnapshot.data();
 
