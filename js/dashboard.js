@@ -21,6 +21,12 @@ function getDashboardData(){
 
     var value = documentSnapshot.data();
 
+    var url = 'https://api-v1.classvibes.net/api/platformData'
+
+    $.get(url, function(err, data){
+      console.log(data)
+    })
+
     var totalEarnings = value.totalEarnings;
     var totalUsers = value.totalUsers;
     var districtsTotal = value.totalDistricts;

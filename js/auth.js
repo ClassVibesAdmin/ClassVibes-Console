@@ -23,6 +23,7 @@ function signInWithEmail() {
 
   let xhr = new XMLHttpRequest();
   xhr.open('GET', `https://console.classvibes.net/verifyAuth-2FA?userToken=${otpInput}`, true);
+  xhr.setRequestHeader('Access-Control-Allow-Origin', "*")
   xhr.send();
 
   xhr.onreadystatechange = processRequest;
