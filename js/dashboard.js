@@ -16,6 +16,14 @@ function initializeFirebase(){
 
 
 function getDashboardData(){
+  var url = 'https://api-v1.classvibes.net/api/onlineUsers'
+
+  $.get(url, function(data, err){
+    console.log(data)
+
+    $('#online-users').html(data['message'])
+
+  })
     
   firebase.firestore().collection("Application Management").doc("Statistics").get().then((documentSnapshot) => {
 
@@ -37,6 +45,13 @@ function getDashboardData(){
       web = message['web']
 
       totalUsers = message['total']
+
+      if(mobile > web){
+        $('#popular-platform').html("Mobile")
+      } else if(web >= mobile){
+        $('#popular-platform').html("Web")
+      }
+
 
       
     var totalEarnings = value.totalEarnings;
