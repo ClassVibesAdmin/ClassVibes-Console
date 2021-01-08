@@ -84,11 +84,13 @@ function getServerManagementInfo() {
             seconds = dateObj.getSeconds();
 
             timeString = (days-1).toString().padStart(2, '0')
-            + ':' + hours.toString().padStart(2, '0')
-                + ':' + minutes.toString().padStart(2, '0')
-                + ':' + seconds.toString().padStart(2, '0');
+            + 'd ' + hours.toString().padStart(2, '0')
+                + 'hrs ' + minutes.toString().padStart(2, '0')
+                + 'sec ' + seconds.toString().padStart(2, '0');
 
             console.log(timeString);
+
+            console.log("EHLLo")
 
             $('#serverUptime').html(timeString);
 

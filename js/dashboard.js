@@ -21,17 +21,29 @@ function getDashboardData(){
 
     var value = documentSnapshot.data();
 
-    var url = 'https://api-v1.classvibes.net/api/platformData'
+    
+    var mobile = 0
+    var web = 0
+    var totalUsers = 0
 
-    $.get(url, function(err, data){
+    var url = 'https://api-v1.classvibes.net/api/platformStats'
+
+    $.get(url, function(data, err){
       console.log(data)
-    })
 
+      var message = data['message']
+
+      mobile = message['mobile']
+      web = message['web']
+
+      totalUsers = message['total']
+
+      
     var totalEarnings = value.totalEarnings;
-    var totalUsers = value.totalUsers;
+    
     var districtsTotal = value.totalDistricts;
-    var mobile = value.mobileUsers;
-    var web = value.webUsers;
+    //var mobile = value.mobileUsers;
+    //var web = value.webUsers;
 
     var roundedTotal = parseFloat(totalEarnings).toFixed(2);
 
@@ -224,6 +236,9 @@ var myLineChart = new Chart(ctx, {
 
 
     console.log(totalEarnings);
+
+    })
+
 
   });
 }
