@@ -193,14 +193,16 @@ function sendServerAlert() {
 
             $('#alertSendError').html("");
 
-            var Encryptor = new Encryptor_Class_Vibes();
+            //var Encryptor = new Encryptor_Class_Vibes();
 
             
-            var encrypted_title = Encryptor.encrypt(document.getElementById('alertTitle').value);
+            //var encrypted_title = Encryptor.encrypt(document.getElementById('alertTitle').value);
 
-            var encrypted_message = Encryptor.encrypt(document.getElementById('alertDescription').value);
+            //var encrypted_message = Encryptor.encrypt(document.getElementById('alertDescription').value);
 
-            console.log(encrypted_title);
+            var encrypted_title = document.getElementById('alertTitle').value;
+
+            var encrypted_message = document.getElementById('alertDescription').value;
 
 
             firebase.firestore().collection('Application Management').doc("ServerAlerts").set({
